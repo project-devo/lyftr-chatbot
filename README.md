@@ -212,4 +212,4 @@ between sessions, per-request tokens, system-prompt persistence, and the JSON 50
   failing requests.
 - **The cache survives restarts.** The LiteLLM disk cache lives on the same `/data` volume as SQLite.
 - **`make test` runs in a Docker test stage.** The suite runs anywhere Docker runs.
-- **Non-root runtime container**, plus a light/dark theme that follows the OS setting.
+- **Non-root runtime container**, plus a clean light theme with example prompts.

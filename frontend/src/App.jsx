@@ -11,6 +11,8 @@ const SIMULATIONS = [
   { value: "*=429", label: "all keys → 429 (expect 503)" },
 ];
 
+const EXAMPLES = ["What is the capital of France?", "My name is Priyank", "Explain caching in one sentence"];
+
 function Meta({ meta }) {
   const cached = meta.resolution_source === "LLM_CACHE";
   return (
@@ -93,11 +95,14 @@ export default function App() {
   return (
     <div className="app">
       <header className="top">
-        <div>
-          <h1>LLM Chatbot</h1>
-          <p className="sub">
-            Key failover · response caching · per-request tokens — session <code>{sessionId}</code>
-          </p>
+        <div className="brand">
+          <div className="logo" aria-hidden="true">✦</div>
+          <div>
+            <h1>LLM Chatbot</h1>
+            <p className="sub">
+              Key failover · response caching · per-request tokens · session <code>{sessionId}</code>
+            </p>
+          </div>
         </div>
         <button className="ghost" onClick={() => window.location.reload()} title="Start a new session">
           New chat
@@ -141,13 +146,22 @@ export default function App() {
       <main className="chat" aria-live="polite">
         {messages.length === 0 && (
           <div className="empty">
-            <p>Ask anything. Every reply shows where it came from, the model, latency and tokens for that request.</p>
-            <p className="hint">Tip: send the same first message in a new chat to see an LLM_CACHE hit.</p>
+            <div className="empty-icon" aria-hidden="true">💬</div>
+            <h2>How can I help?</h2>
+            <p>Every reply shows its source, model, latency and the tokens for that request.</p>
+            <div className="suggestions">
+              {EXAMPLES.map((ex) => (
+                <button key={ex} onClick={() => setInput(ex)}>
+                  {ex}
+                </button>
+              ))}
+            </div>
           </div>
         )}
         {messages.map((m, i) =>
           m.role === "assistant" ? (
             <div key={i} className="row left">
+              <div className="avatar" aria-hidden="true">AI</div>
               <div className="bubble assistant" data-testid="assistant-message">
                 <div className="text">{m.content}</div>
                 <Meta meta={m.metadata} />
@@ -155,6 +169,7 @@ export default function App() {
             </div>
           ) : m.role === "error" ? (
             <div key={i} className="row left">
+              <div className="avatar err" aria-hidden="true">!</div>
               <div className="bubble error" role="alert" data-testid="error-message">
                 {m.content}
               </div>
@@ -167,6 +182,7 @@ export default function App() {
         )}
         {pending && (
           <div className="row left">
+            <div className="avatar" aria-hidden="true">AI</div>
             <div className="bubble assistant typing" aria-label="Assistant is typing">
               <span />
               <span />
