@@ -13,9 +13,9 @@ docker-compose.yml · Makefile · .env.example
 
 | | URL |
 |---|---|
-| Frontend | _TBD_ |
-| Backend | _TBD_ |
-| Repository | _TBD_ |
+| Frontend (Vercel) | https://lyftr-chatbot-phi.vercel.app |
+| Backend (Render) | https://lyftr-chatbot-api-kli9.onrender.com (try `/health`) |
+| Repository | https://github.com/project-devo/lyftr-chatbot |
 
 > **Render free-tier caveats.** The backend runs on Render's free plan:
 > - It **sleeps after ~15 min idle**; the first request can take ~30-60 s. Mitigations: the frontend calls
